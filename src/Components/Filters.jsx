@@ -6,7 +6,7 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import "./styles.css";
 import { CartState } from "../Context/Context";
 import Rating1 from "./Rating";
@@ -14,12 +14,12 @@ import Rating1 from "./Rating";
 export default function Filters() {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const {
-    productState: { byStock, byRating, byFastDelivery, sort },
+    productState: { byStock, byRating, byFastDelivery, sort, searchQuery },
     productDispatch,
   } = CartState();
   // const [value, setValue] = useState(2);
 
-  console.log(byStock, byRating, byFastDelivery, sort);
+  console.log(byStock, byRating, byFastDelivery, sort, searchQuery);
 
   return (
     <div className="filters">
@@ -34,7 +34,7 @@ export default function Filters() {
             <FormControlLabel
               value="asce"
               control={<Radio />}
-              label="Ascending"
+              label="Ascending by Price"
               onChange={() =>
                 productDispatch({
                   type: "SORT_BY_PRICE",
@@ -46,7 +46,7 @@ export default function Filters() {
             <FormControlLabel
               value="desc"
               control={<Radio />}
-              label="Descending"
+              label="Descending by Price"
               onChange={() =>
                 productDispatch({
                   type: "SORT_BY_PRICE",
@@ -56,30 +56,44 @@ export default function Filters() {
               checked={sort === "highToLow" ? true : false}
             />
           </RadioGroup>
-          <Checkbox
-            {...label}
-            onChange={() =>
-              productDispatch({
-                type: "FILTER_BY_STOCK",
-              })
-            }
-            checked={byStock}
-          />
-          Include Out of Stock
-          <br />
-          <Checkbox
-            {...label}
-            onChange={() =>
-              productDispatch({
-                type: "FILTER_BY_FASTDELIVERY",
-              })
-            }
-            checked={byFastDelivery}
-          />
-          Fast Delivery Only
-          <br />
+          <span
+            style={{
+              display: "flex",
+              justifyItems: "flex-start",
+              flexDirection: "column",
+              marginLeft: "-11px",
+            }}
+          >
+            <div>
+              <Checkbox
+                {...label}
+                onChange={() =>
+                  productDispatch({
+                    type: "FILTER_BY_STOCK",
+                  })
+                }
+                checked={byStock}
+              />
+              Include Out of Stock
+            </div>
+            <div>
+              {/* <br /> */}
+              <Checkbox
+                {...label}
+                onChange={() =>
+                  productDispatch({
+                    type: "FILTER_BY_FASTDELIVERY",
+                  })
+                }
+                checked={byFastDelivery}
+              />
+              Fast Delivery Only
+            </div>
+            {/* <br /> */}
+          </span>
         </Typography>
       </span>
+
       <span style={{ display: "flex", flexWrap: "wrap", overflow: "hidden" }}>
         Rating:{" "}
         <Rating1

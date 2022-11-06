@@ -103,35 +103,53 @@ export default function CustomizedMenus() {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => handleClose} className="cart-item">
-          {cart.length > 0 ? (
-            cart.map((prod) => (
-              <span className="cartitem" key={prod.id}>
-                <img src={prod.image} className="cartItemImg" alt={prod.name} />
-                <div className="cartItemDetail">
-                  <span>{prod.name}</span>
-                  <span>₹ {prod.price.split(".")[0]}</span>
-                </div>
-                <DeleteIcon
-                  onClick={() =>
-                    dispatch({ type: "REMOVE_FROM_CART", payload: prod })
-                  }
-                />
-              </span>
-            ))
-          ) : (
-            <span style={{ padding: 10 }}>Cart is Empty!</span>
-          )}
-          <Link to="/cart">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+            margin: "5px",
+            padding: 0,
+          }}
+        >
+          <MenuItem onClick={() => handleClose} className="cart-item">
+            {cart.length > 0 ? (
+              cart.map((prod) => (
+                <span className="cartitem" key={prod.id}>
+                  <img
+                    src={prod.image}
+                    className="cartItemImg"
+                    alt={prod.name}
+                  />
+                  <div className="cartItemDetail">
+                    <span>{prod.name}</span>
+                    <span>₹ {prod.price.split(".")[0]}</span>
+                  </div>
+                  <DeleteIcon
+                    onClick={() =>
+                      dispatch({ type: "REMOVE_FROM_CART", payload: prod })
+                    }
+                  />
+                </span>
+              ))
+            ) : (
+              <span style={{ padding: 10 }}>Cart is Empty!</span>
+            )}
+
             <Button
               variant="contained"
               //   href="#contained-buttons"
               sx={{ display: "flex", flexGrow: 1 }}
             >
-              <Typography>Go To Cart</Typography>
+              <Typography
+                component={Link}
+                to={"/cart"}
+                sx={{ textDecoration: "none", color: "white" }}
+              >
+                Go To Cart
+              </Typography>
             </Button>
-          </Link>
-        </MenuItem>
+          </MenuItem>
+        </div>
       </StyledMenu>
     </div>
   );

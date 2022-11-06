@@ -4,8 +4,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
-import CardRating from "./CardRating";
 import { CartState } from "../Context/Context";
+import Rating1 from "./Rating";
 
 export default function SingleProduct({ prod }) {
   const {
@@ -35,7 +35,7 @@ export default function SingleProduct({ prod }) {
               ) : (
                 <div>4 Days Delivery</div>
               )}
-              <CardRating rate={prod.ratings} />
+              <Rating1 rating={prod.ratings} />
             </Typography>
           </CardContent>
         </CardActionArea>
