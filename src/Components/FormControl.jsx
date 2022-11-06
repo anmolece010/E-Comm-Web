@@ -1,6 +1,5 @@
 import { TextField } from "@mui/material";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 import { CartState } from "../Context/Context";
 
 const FormControl = ({ prod }) => {

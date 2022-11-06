@@ -1,38 +1,16 @@
-import { Rating } from "@mui/material";
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { CartState } from "../Context/Context";
+import React from "react";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 
-const Rating1 = () => {
-  const {
-    productState: { byFastDelivery, byRating, byStock, sort },
-    productDisptach,
-  } = CartState();
-
-  // console.log(productState);
-  const [value, setValue] = useState(byRating);
-  //   console.log(value);
-
+const Rating1 = ({ rating, onClick }) => {
   return (
     <div>
-      <Rating
-        name="simple-controlled"
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-
-          productDisptach({
-            type: "FILTER_BY_RATING",
-            payload: newValue,
-          });
-        }}
-        // onClick={(i) =>
-        //   productDisptach({
-        //     type: "FILTER_BY_RATING",
-        //     payload: i + 1,
-        //   })
-        // }
-      />
+      {[...Array(5)].map((_, i) => (
+        <span key={i} style={{ cursor: "pointer" }} onClick={() => onClick(i)}>
+          {rating > i ? <StarIcon /> : <StarBorderIcon />}
+        </span>
+      ))}
+      {/* <StarBorderIcon /> */}
     </div>
   );
 };
